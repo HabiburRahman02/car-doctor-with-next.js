@@ -1,4 +1,5 @@
 import { dbConnect } from "@/lib/dbConnect";
+import Link from "next/link";
 
 const Services = async () => {
     const data = await dbConnect('services').find().toArray();
@@ -18,7 +19,9 @@ const Services = async () => {
                             <h2 className="card-title">{item.title}</h2>
                             <p>{item.description.slice(0, 150)}</p>
                             <div className="card-actions justify-end">
-                                <button className="btn btn-primary">Buy Now</button>
+                                <Link href={`/services/${item._id}`}>
+                                    <button className="btn btn-primary">Details</button>
+                                </Link>
                             </div>
                         </div>
                     </div>)
