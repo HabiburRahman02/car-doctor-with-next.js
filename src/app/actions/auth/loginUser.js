@@ -6,17 +6,14 @@ export const loginUser = async (payload) => {
     const userCollection = dbConnect('users');
     const user = await userCollection.findOne({ email: payload.email });
     console.log('USER', user);
-    if (user) {
-        console.log('user ache');
-    }
-    else {
-       return {message: 'Can not same'}
-    }
+    const {email,password} = payload;
+    if(!email || password) return null
+    if (!user) return null
     const isPassOk = bcrypt.compare(user.password, payload.password);
     if(isPassOk){
         return user
     }
     else{
-        return  {message: 'Password not oky'}
+        return  null
     }
 }

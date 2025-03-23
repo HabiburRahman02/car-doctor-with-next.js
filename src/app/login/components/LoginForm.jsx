@@ -10,8 +10,14 @@ const LoginForm = () => {
         const email = form.email.value
         const password = form.password.value
         let data = { email, password };
-        signIn('credentials', { email, password, callbackUrl: '/' })
         loginUser(data);
+        try {
+            signIn('credentials', { email, password, callbackUrl: '/' })
+        } catch (error) {
+            console.log('ERR', error);
+            alert('Unauthenticated user')
+        }
+
     }
     return (
         <form onSubmit={handleLogin}>
