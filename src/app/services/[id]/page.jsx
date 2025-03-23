@@ -13,6 +13,7 @@ const ServiceDetails = async ({ params }) => {
                 <div className="card bg-base-100 w-full shadow-sm">
                     <figure>
                         <img
+                            className='rounded-bl-[80px] rounded-tr-[80px]'
                             src={data.img}
                             alt="Shoes" />
                     </figure>
