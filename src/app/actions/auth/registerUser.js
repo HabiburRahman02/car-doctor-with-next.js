@@ -6,7 +6,7 @@ export const registerUser = async (payload) => {
 
     const user = await userCollection.findOne({ email: payload.email })
     if (!user) {
-        const hashPassword =await bcrypt.hash(payload.password,10);
+        const hashPassword = await bcrypt.hash(payload.password, 10);
         payload.password = hashPassword;
         const result = await userCollection.insertOne(payload);
         return result;
