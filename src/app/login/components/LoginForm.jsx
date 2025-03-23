@@ -14,18 +14,20 @@ const LoginForm = () => {
         let data = { email, password };
         loginUser(data);
         try {
-            const res = await signIn('credentials', {
+            const response = await signIn('credentials', {
                 email,
                 password,
                 callbackUrl: '/',
-                // redirect: false
+                redirect: false
             })
-            // if (res.ok) {
-            //     router.push('/')
-            // }
-            // else {
-            //     alert('Unauthenticated')
-            // }
+            console.log("SignIn Response:", response);
+            if (response.ok) {
+                router.push('/')
+                form.reset()
+            }
+            else {
+                alert('Unauthenticated')
+            }
         } catch (error) {
             console.log('ERR', error);
             alert('Unauthenticated user')
