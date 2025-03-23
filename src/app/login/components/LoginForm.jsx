@@ -2,9 +2,11 @@
 
 import { loginUser } from "@/app/actions/auth/loginUser";
 import { signIn } from "next-auth/react"
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
-    const handleLogin = (e) => {
+    const router = useRouter()
+    const handleLogin = async (e) => {
         e.preventDefault();
         const form = e.target;
         const email = form.email.value
@@ -12,7 +14,18 @@ const LoginForm = () => {
         let data = { email, password };
         loginUser(data);
         try {
-            signIn('credentials', { email, password, callbackUrl: '/' })
+            const res = await signIn('credentials', {
+                email,
+                password,
+                callbackUrl: '/',
+                // redirect: false
+            })
+            // if (res.ok) {
+            //     router.push('/')
+            // }
+            // else {
+            //     alert('Unauthenticated')
+            // }
         } catch (error) {
             console.log('ERR', error);
             alert('Unauthenticated user')

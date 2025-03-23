@@ -9,9 +9,10 @@ export const registerUser = async (payload) => {
         const hashPassword = await bcrypt.hash(payload.password, 10);
         payload.password = hashPassword;
         const result = await userCollection.insertOne(payload);
+        result.insertedId = result.insertedId.toString();
         return result;
     }
-    return { success: false, message: 'already exist' }
+    return null
 
 
 }
